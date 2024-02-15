@@ -1,0 +1,39 @@
+// Array to store drawn circles
+var circles = [];
+
+function setup() {
+  createCanvas(400, 400);
+}
+
+function draw() {
+  background(233, 239, 240);
+  
+  for (var i = 0; i < circles.length; i++) {
+    var circle = circles[i];
+    fill(circle.color);
+    ellipse(circle.x, circle.y, circle.diameter, circle.diameter);
+  }
+}
+
+function mouseDragged() {
+  // Check if the mouse is within the canvas bounds
+  if (mouseX >= 0 && mouseX <= width && mouseY >= 0 && mouseY <= height) {
+    // Draw a circle at the mouse position when dragging
+    var newColor = generateRandomColor();
+    var newCircle = {
+      x: mouseX,
+      y: mouseY,
+      diameter: random(5, 30),
+      color: newColor
+    };
+    circles.push(newCircle);
+  }
+}
+
+// Function to generate random color with RGB components not less than 192
+function generateRandomColor() {
+  var r = random(192, 256);
+  var g = random(192, 256);
+  var b = random(192, 256);
+  return color(r, g, b);
+}
